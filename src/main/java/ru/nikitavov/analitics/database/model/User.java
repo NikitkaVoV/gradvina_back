@@ -27,7 +27,7 @@ public class User implements IEntity<Integer>
 
     @NotBlank
     @Column(name = "full_name", nullable = false)
-    String full_name;
+    String fullName;
 
 
     @NotBlank

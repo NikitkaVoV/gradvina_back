@@ -1,26 +1,28 @@
 package ru.nikitavov.analitics.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.nikitavov.analitics.database.model.User;
+import ru.nikitavov.analitics.database.repository.UserRepository;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @CrossOrigin
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 public class UserController {
 
-    @PostMapping("login")
-    public boolean login(@RequestBody String login, @RequestBody String password) {
-        return true;
-    }
+    private final UserRepository userRepository;
 
-    @PostMapping("reg")
-    public boolean reg(@RequestBody String login, @RequestBody String password, @RequestBody String name) {
-        return true;
+    @GetMapping
+    public ResponseEntity<List<User>> all() {
+        return ResponseEntity.ok(userRepository.findAll());
     }
 
     @GetMapping("me/{id}")
-    public String me(@PathVariable String id) {
-        return "";
+    public ResponseEntity<User> me(@PathVariable int id) {
+        return ResponseEntity.ok(userRepository.findById(id).get());
     }
 }
